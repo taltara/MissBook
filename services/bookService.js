@@ -51,26 +51,23 @@ function getNextPrevCars(bookId) {
     var nextId;
     var prevId;
 
-    if ((currIdx + 1) > gBooks.length - 1) {
+      if ((currIdx + 1) > gBooks.length - 1) {
 
         nextId = gBooks[0].id;
         nextTitle = gBooks[0].title;
-
-        prevId = gBooks[gBooks.length - 1].id;
-        prevTitle = gBooks[gBooks.length - 1].title;
-
-    } else if ((currIdx - 1) < 0) {
-
-        nextId = gBooks[0].id;
-        nextTitle = gBooks[0].title;
-
-        prevId = gBooks[gBooks.length - 1].id;
-        prevTitle = gBooks[gBooks.length - 1].title;
 
     } else {
 
         nextId = gBooks[currIdx + 1].id;
         nextTitle = gBooks[currIdx + 1].title;
+    }
+    
+    if ((currIdx - 1) < 0) {
+
+        prevId = gBooks[gBooks.length - 1].id;
+        prevTitle = gBooks[gBooks.length - 1].title;
+
+    } else {
 
         prevId = gBooks[currIdx - 1].id;
         prevTitle = gBooks[currIdx - 1].title;
