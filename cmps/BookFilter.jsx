@@ -21,6 +21,8 @@ export default class Filter extends React.Component {
         ev.preventDefault()
         this.props.onSetFilter(this.state.filter)
     }
+
+    
     render() {
         const { title, maxPrice, minPrice, author } = this.state.filter
         const {onShowFilter} = this.props;

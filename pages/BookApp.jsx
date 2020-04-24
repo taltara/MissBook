@@ -3,6 +3,7 @@ import storageService from '../services/storageService.js'
 import BookFilter from '../cmps/BookFilter.jsx'
 import { BookAdd}  from '../cmps/BookAdd.jsx'
 import { BookList } from '../cmps/BookList.jsx';
+import { eventBus } from "../services/eventBusService.js";
 
 export class BookApp extends React.Component {
 
@@ -30,6 +31,7 @@ export class BookApp extends React.Component {
         console.log(book);
         bookService.add(book);
         this.loadBooks();
+        eventBus.emit('show-msg', {txt: `'${book.title}'`, url: `/#/books/${book.name}/${book.id}`});
     }
 
     onSaveBook = (book) => {
@@ -42,7 +44,8 @@ export class BookApp extends React.Component {
     }
 
     onSetFilter = (filterBy) => {
-        this.setState({ filterBy }, () => this.loadBooks());
+        console.log(filterBy);
+        this.setState({ filterBy: filterBy }, () => this.loadBooks());
     }
 
     onShowFilter = () => { this.setState(({showFilter}) => ({ showFilter: !showFilter })) }

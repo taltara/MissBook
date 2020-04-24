@@ -12,6 +12,7 @@ export default {
     getById,
     getBookApiInfo,
     add,
+    getNextPrevCars,
 }
 
 function save(bookToSave) {
@@ -28,6 +29,56 @@ function add(bookToSave) {
     storageService.store(STORAGE_KEY, gBooks);
 }
 
+function getNextPrevCars(bookId) {
+
+    console.log(bookId, gBooks);
+
+    // query(null)
+    //     .then(books => {
+    //         gBooks = books;
+    //         console.log(gBooks);
+
+    //     });
+
+    let currIdx = gBooks.findIndex(book => {
+
+        return book.id === bookId;
+    });
+    console.log(currIdx);
+
+    var nextTitle;
+    var prevTitle;
+    var nextId;
+    var prevId;
+
+    if ((currIdx + 1) > gBooks.length - 1) {
+
+        nextId = gBooks[0].id;
+        nextTitle = gBooks[0].title;
+
+        prevId = gBooks[gBooks.length - 1].id;
+        prevTitle = gBooks[gBooks.length - 1].title;
+
+    } else if ((currIdx - 1) < 0) {
+
+        nextId = gBooks[0].id;
+        nextTitle = gBooks[0].title;
+
+        prevId = gBooks[gBooks.length - 1].id;
+        prevTitle = gBooks[gBooks.length - 1].title;
+
+    } else {
+
+        nextId = gBooks[currIdx + 1].id;
+        nextTitle = gBooks[currIdx + 1].title;
+
+        prevId = gBooks[currIdx - 1].id;
+        prevTitle = gBooks[currIdx - 1].title;
+    }
+
+    return { prev: { prevId, prevTitle }, next: { nextId, nextTitle } };
+}
+
 function query(filterBy) {
 
     if (!gBooks) gBooks = storageService.load(STORAGE_KEY, booksDb);
@@ -35,19 +86,30 @@ function query(filterBy) {
     // if (gBooks) utilService.shuffle(gBooks);
 
     if (filterBy) {
-        var { title, maxPrice, minPrice, author } = filterBy
-        maxPrice = maxPrice ? maxPrice : Infinity
-        minPrice = minPrice ? minPrice : 0
-        gBooks.filter(book => book.title.includes(title)
-            && (book.listPrice.amount < maxPrice)
-            && book.listPrice.amount > minPrice
-            && book.authors.some(anAuthor => {
-                // console.log(anAuthor, author);
-                let match = (anAuthor.toLowerCase()).includes(author);
-                // console.log(match);
+        console.log(filterBy);
+        var { title, maxPrice, minPrice, author } = filterBy;
 
-                if (match) return match;
-            }));
+        let isEmpty = title + maxPrice + minPrice + author;
+
+        if (isEmpty === "") {
+            gBooks = storageService.load(STORAGE_KEY, booksDb);
+
+        } else {
+
+            maxPrice = maxPrice ? maxPrice : Infinity
+            minPrice = minPrice ? minPrice : 0
+            gBooks = gBooks.filter(book => book.title.includes(title)
+                && (book.listPrice.amount < maxPrice)
+                && book.listPrice.amount > minPrice
+                && book.authors.some(anAuthor => {
+                    // console.log(anAuthor, author);
+                    let match = (anAuthor.toLowerCase()).includes(author);
+                    // console.log(match);
+
+                    if (match) return match;
+                }));
+        }
+
 
     }
     return Promise.resolve(gBooks);
@@ -84,6 +146,7 @@ function remove(bookId) {
 }
 
 function getById(bookId) {
+
     if (!gBooks) {
 
         gBooks = storageService.load(STORAGE_KEY, booksDb);
@@ -130,7 +193,17 @@ const booksDb = [
             "isOnSale": false
         },
         "reviews": [
-
+            {currDate: 1587737324856, id: "Y0ic8", rating: "3", reviewer: "sdghsdfgh", text: "sdfghdfhd"},
+            {currDate: 1587737324856, id: "Y0ic8", rating: "3", reviewer: "sdghsdfgh", text: "sdfghdfhd"},
+            {currDate: 1587737324856, id: "Y0ic8", rating: "3", reviewer: "sdghsdfgh", text: "sdfghdfhd"},
+            {currDate: 1587737324856, id: "Y0ic8", rating: "3", reviewer: "sdghsdfgh", text: "sdfghdfhd"},
+            {currDate: 1587737324856, id: "Y0ic8", rating: "3", reviewer: "sdghsdfgh", text: "sdfghdfhd"},
+            {currDate: 1587737324856, id: "Y0ic8", rating: "3", reviewer: "sdghsdfgh", text: "sdfghdfhd"},
+            {currDate: 1587737324856, id: "Y0ic8", rating: "3", reviewer: "sdghsdfgh", text: "sdfghdfhd"},
+            {currDate: 1587737324856, id: "Y0ic8", rating: "3", reviewer: "sdghsdfgh", text: "sdfghdfhd"},
+            {currDate: 1587737324856, id: "Y0ic8", rating: "3", reviewer: "sdghsdfgh", text: "sdfghdfhd"},
+            {currDate: 1587737324856, id: "Y0ic8", rating: "3", reviewer: "sdghsdfgh", text: "sdfghdfhd"},
+            {currDate: 1587737324856, id: "Y0ic8", rating: "3", reviewer: "sdghsdfgh", text: "sdfghdfhd"}
         ]
     },
     {

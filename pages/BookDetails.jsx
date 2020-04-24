@@ -1,12 +1,14 @@
 import { LongTxt } from '../cmps/LongTxt.jsx';
 import bookService from '../services/bookService.js';
 import { ReviewAdd } from '../cmps/ReviewAdd.jsx'
+const { Link } = ReactRouterDOM
 
 export class BookDetails extends React.Component {
 
     state = {
 
         book: null,
+        addClass: '',
         isLongTxtShown: undefined,
         bookDesc: '',
         showAddReview: false,
@@ -23,11 +25,8 @@ export class BookDetails extends React.Component {
         this.setState({ selectedBook: null })
     }
 
-    componentDidMount() {
-
-        const id = this.props.match.params.bookId;
+    loadBook(id) {
         console.log(id);
-
         bookService.getById(id)
             .then(book => {
                 console.log(book);
@@ -35,9 +34,33 @@ export class BookDetails extends React.Component {
                 let bookDesc = book.description;
                 let isLongTxtShown = (bookDesc.length > 100) ? false : undefined;
                 this.setState({ bookDesc, isLongTxtShown, book });
-            })
-            .catch('ERROR')
+            }),
+            (error) => {
+                console.error(error);
+            }
+    }
 
+    componentDidMount() {
+
+        const id = this.props.match.params.bookId;
+        this.loadBook(id);
+        console.log(id);
+
+
+        this.prevNext = bookService.getNextPrevCars(id);
+    }
+
+    componentDidUpdate(prevProps) {
+
+        const id = this.props.match.params.bookId;
+
+
+        this.prevNext = bookService.getNextPrevCars(id);
+        if (prevProps.match.params.bookId !== this.props.match.params.bookId) {
+            console.log('Route changed, so we should load the new car');
+            this.loadBook(this.props.match.params.bookId);
+            this.setState({ addClass: ''});
+        }
     }
 
     onRemoveReview = (bookId, reviewId) => {
@@ -74,21 +97,27 @@ export class BookDetails extends React.Component {
     onShowReviewForm = () => {
         console.log('here');
 
-        this.setState(({showAddReview}) => ({ showAddReview: !showAddReview }));
+        this.setState(({ showAddReview }) => ({ showAddReview: !showAddReview }));
     }
 
     toggleDescLength = () => {
 
         if (this.state.isLongTxtShown === undefined) return;
 
-        this.setState(({isLongTxtShown}) => ({isLongTxtShown: !isLongTxtShown}));
+        this.setState(({ isLongTxtShown }) => ({ isLongTxtShown: !isLongTxtShown }));
+    }
+
+    onLoadShowImg = () => {
+
+        this.setState({ addClass: 'show'});
     }
 
     render() {
 
         const Loading = <p>Loading...</p>
         const { history } = this.props
-        const { bookDesc, book, showAddReview } = this.state
+        const { bookDesc, book, showAddReview, addClass } = this.state
+        // const { prev, next } = this.prevNext;
 
         if (book) {
 
@@ -141,7 +170,7 @@ export class BookDetails extends React.Component {
                             }
                         </div>
                         {ageNote && <p className="date-note note">-{ageNote}-</p>}
-                        <img src={book.thumbnail} className="book-img" />
+                        <img src={book.thumbnail} className={`book-img ${addClass}`} onLoad={this.onLoadShowImg} />
                         {lengthNote && <p className="length-note note">-{lengthNote}-</p>}
                         <div className="book-categories flex space-evenly">
                             {
@@ -157,6 +186,11 @@ export class BookDetails extends React.Component {
                         <LongTxt text={bookDesc} isLongTxtShown={this.state.isLongTxtShown} toggleDescLength={this.toggleDescLength} update={this.onShowReviewForm} />
                         <button onClick={() => this.onDelete(book.id)} className="btn">Delete</button>
                         <p className="book-id">[ Id:  {book.id} ]</p>
+                        <span className="nav-books grid">
+                            
+                            <Link to={`/books/${this.prevNext.prev.prevTitle}/${this.prevNext.prev.prevId}`} className="can-press">Prev</Link>
+                            <Link to={`/books/${this.prevNext.next.nextTitle}/${this.prevNext.next.nextId}`} className="can-press">Next</Link>
+                        </span>
                     </main>
                     <div className="book-reviews flex column align-center">
                         {!showAddReview && <p className="review-title can-press" onClick={this.onShowReviewForm}>Click To Review</p>}

@@ -1,13 +1,52 @@
 @font-face {
     font-family: 'booksFont';
-    src: url('../fonts/baskvl.woff2') format('woff2'), url('../fonts/baskvl.woff') format('woff'), url('../fonts/baskvl.ttf') format('truetype');
+    src: url('../fonts/baskvl.woff2') format('woff2'), 
+    url('../fonts/baskvl.woff') format('woff'), 
+    url('../fonts/baskvl.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'archia';
+    src: url('../fonts/archia.woff2') format('woff2'), 
+    url('../fonts/archia.woff') format('woff')
+}
+
+@font-face {
+    font-family: 'gilam';
+    src: url('../fonts/gilam.ttf')
+}
+
+@font-face {
+    font-family: 'gilamSemi';
+    src: url('../fonts/gilamSemi.ttf')
+}
+
+@font-face {
+    font-family: 'gilamItalic';
+    src: url('../fonts/gilam-italic.ttf')
+}
+
+@font-face {
+    font-family: 'gilamLight';
+    src: url('../fonts/gilam-light.ttf')
+}
+
+@font-face {
+    font-family: 'gilamBook';
+    src: url('../fonts/gilam-book.ttf')
+}
+
+@font-face {
+    font-family: 'gilamBookItalic';
+    src: url('../fonts/gilam-book-italic.ttf.ttf')
 }
 
 body {
     margin: 0;
     /* font-family: booksFont, serif !important; */
-    font-family: 'Bree Serif', serif;
+    font-family: gilam, serif;
 }
+
 
 p {
     margin: 0;
@@ -26,7 +65,7 @@ li {
 textarea {
     resize: none;
     width: 90%;
-    font-family: 'Bree Serif', serif;
+    font-family: gilamSemi, serif;
 }
 
 /* GENERAL */
@@ -44,24 +83,36 @@ textarea {
     -webkit-box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.75);
-    background-color: rgb(216, 193, 218);
-    background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);
+    background-color: #485461;
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
 }
 
 .navlink {
     font-size: 2rem;
+    color: #f5f7fa;
+    transition: ease-in-out 0.15s;
+}
+
+.navlink:hover {
+    transform: scale(1.1);
 }
 
 .nav-links-span {
     width: 30%;
+    min-width: 24rem;
     margin-right: 1rem;
 }
 
-.active {}
+.active {
+    border-bottom: 1px dashed rgba(255, 215, 0, 0.25);
+
+    color: #f8f9d2;
+}
 
 .logo-text {
     font-size: 2rem;
     color: rgba(0, 115, 229, 1);
+    font-family: gilam, serif;
 }
 
 .logo-text:nth-of-type(1) {
@@ -69,7 +120,7 @@ textarea {
 }
 
 .logo-text:nth-of-type(2) {
-    font-style: italic;
+    font-family: gilamItalic, serif;
 }
 
 .main-logo {
@@ -125,7 +176,6 @@ textarea {
 }
 
 .search-box input {
-
     margin-right: 1rem;
 }
 
@@ -146,9 +196,10 @@ textarea {
 .filter-title:hover {
     transform: scale(1.33);
 }
+
 .book-reviews .review-form {
     width: 100%;
-    padding: 0;
+    padding: 0.25rem 0;
     -webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
@@ -187,12 +238,10 @@ textarea {
 }
 
 .results {
-
     width: 100%;
 }
 
 .results-section {
-
     justify-content: flex-start;
     background-color: rgba(248, 222, 126, 0.5);
     border-right: 1px dashed;
@@ -201,7 +250,6 @@ textarea {
 }
 
 .result-card {
-
     margin: 0.5rem;
     text-align: center;
     padding: 0.25rem;
@@ -217,34 +265,27 @@ textarea {
     border-radius: 5px;
     opacity: 0;
     pointer-events: none;
-
 }
 
 .result-card:hover {
-
     transform: scale(1.5);
     z-index: 2;
 }
 
 .result-option {
-
     max-width: 5rem;
     margin-bottom: 0.25rem;
     max-width: 8rem;
 }
 
 .result-card img {
-
     width: 5rem;
     -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
 }
 
-.results-header {
-
-
-}
+.results-header {}
 
 /* DETAILS */
 
@@ -261,9 +302,13 @@ textarea {
 }
 
 .book-details {
-    padding: 0 1rem 1rem;
+    padding: 0 1rem 0.25rem;
     background-color: #cdedfd;
     background-image: linear-gradient(319deg, #cdedfd 0%, #ffec82 37%, #ffcfd2 100%);
+}
+
+.book-details>*:not(img) {
+    z-index: 0;
 }
 
 .book-id {
@@ -275,12 +320,14 @@ textarea {
     -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
+    opacity: 0;
 }
 
 .book-reviews {
     min-width: 20rem;
     justify-content: flex-start;
-    padding:  0 0.5rem 0.5rem;
+    padding: 0 0.5rem 0.5rem;
+    max-height: 52.25rem;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -296,10 +343,10 @@ textarea {
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-.book-review:hover {
+/* .book-review:hover {
     transform: scale(1.025);
     z-index: 1;
-}
+} */
 
 .book-review>*:not(:last-child) {
     margin-bottom: 0.5rem;
@@ -342,7 +389,7 @@ textarea {
     font-size: 1.25rem;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
-    align-self: flex-end;
+    align-self: center;
     margin-left: 0;
     margin-right: 0.25rem;
 }
@@ -352,9 +399,12 @@ textarea {
     min-width: 5rem;
 }
 
+.book-img {
+    z-index: 1;
+}
+
 .book-img:hover {
     transform: scale(1.2);
-    z-index: 1;
 }
 
 .book-categories {
@@ -413,6 +463,7 @@ textarea {
     margin-bottom: 0.5rem;
     border-color: rgba(192, 192, 192, 0.25);
     width: fit-content;
+    text-align: center;
 }
 
 .book-subtitle {
@@ -421,17 +472,12 @@ textarea {
     text-align: center;
 }
 
-.book-authors {
-    font-size: 2rem;
-}
-
 .book-details .btn {
     font-size: 1rem;
     padding: 0.25rem 0.5rem;
 }
 
 .book-details .book-description-header .back-btn {
-
     font-size: 1.5rem;
     padding: 0.5rem 1rem;
     margin-top: 1rem;
@@ -483,7 +529,7 @@ textarea {
 }
 
 .review-form input {
-    font-family: 'Bree Serif', serif;
+    font-family: gilamSemi, serif;
 }
 
 .details-container {
@@ -491,14 +537,44 @@ textarea {
 }
 
 .book-description-header {
-
     width: 100%;
+}
+
+.nav-books {
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.nav-books a {
+    transition: ease-in-out 0.15s;
+    opacity: 0.5;
+    font-size: 1.5rem;
+}
+
+.nav-books a:last-of-type {
+    text-align: end;
+}
+
+.nav-books a:first-of-type::before {
+    content: '< ';
+}
+
+.nav-books a:last-of-type::after {
+    content: ' >';
+}
+
+.nav-books a:hover {
+    opacity: 1;
+    transform: scale(1.075);
 }
 
 /* PREVIEWS */
 
 .book-previews {
     margin-top: 1rem;
+    font-family: gilamSemi, serif;
+    
 }
 
 .book-preview {
@@ -597,6 +673,7 @@ textarea {
 }
 
 .home-header {
+    margin-top: 2rem;
     font-size: 5rem;
     font-weight: bold;
 }
@@ -619,6 +696,73 @@ textarea {
 .about-troll {
     transition: ease-in-out 0.3s;
     cursor: pointer;
+}
+
+/* MSG */
+
+.new-book-txt {
+    max-width: 80%;
+    font-size: 2rem;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
+.new-book-link {
+    width: fit-content;
+    text-align: center;
+    font-size: 2rem;
+    color: #045de9;
+    transition: ease-in-out 0.15s;
+    margin: auto;
+    border-bottom: 1px dashed transparent;
+}
+
+.new-book-link:hover {
+    transform: scale(1.2);
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
+.msg-header {
+    margin-bottom: 1rem;
+}
+
+/* .remove-msg {
+    transition: ease-in-out 0.15s;
+}
+
+.remove-msg:hover {
+    transform: scale(1.2);
+} */
+
+.user-msg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 1.2em;
+    padding: 1rem;
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(255, 215, 0, 1);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(255, 215, 0, 1);
+    box-shadow: 0px 0px 15px 0px rgba(255, 215, 0, 1);
+    z-index: 1;
+    background-color: #cdedfd;
+    background-image: linear-gradient(319deg, #cdedfd 0%, #ffec82 37%, #ffcfd2 100%);
+}
+
+.user-msg button {
+    float: right;
+    cursor: pointer;
+    padding: 0.25rem 0.9rem;
+    font-size: 1.5rem;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    transition: ease-in-out 0.15s;
+    border: none;
+}
+
+.user-msg button:hover {
+    background-color: tomato;
+    transform: scale(1.2);
 }
 
 /* FLEX HELPERS */

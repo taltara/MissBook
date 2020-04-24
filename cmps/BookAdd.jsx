@@ -46,6 +46,7 @@ export class BookAdd extends React.Component {
         };
 
         this.props.onNewBook(newBook);
+        this.props.onShowSearch();
     }
 
 
