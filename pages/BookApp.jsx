@@ -1,7 +1,7 @@
 import bookService from '../services/bookService.js'
 import storageService from '../services/storageService.js'
 import BookFilter from '../cmps/BookFilter.jsx'
-import { BookAdd}  from '../cmps/BookAdd.jsx'
+import { BookAdd } from '../cmps/BookAdd.jsx'
 import { BookList } from '../cmps/BookList.jsx';
 import { eventBus } from "../services/eventBusService.js";
 
@@ -31,7 +31,7 @@ export class BookApp extends React.Component {
         console.log(book);
         bookService.add(book);
         this.loadBooks();
-        eventBus.emit('show-msg', {txt: `'${book.title}'`, url: `/#/books/${book.name}/${book.id}`});
+        eventBus.emit('show-msg', { txt: `'${book.title}'`, url: `/#/books/${book.name}/${book.id}` });
     }
 
     onSaveBook = (book) => {
@@ -39,17 +39,17 @@ export class BookApp extends React.Component {
         this.setState({ bookIdToEdit: null })
         this.loadBooks()
     }
-    onSelectBook = (selectedBook) => {
-        this.setState({ selectedBook })
-    }
+    // onSelectBook = (selectedBook) => {
+    //     this.setState({ selectedBook })
+    // }
 
     onSetFilter = (filterBy) => {
         console.log(filterBy);
         this.setState({ filterBy: filterBy }, () => this.loadBooks());
     }
 
-    onShowFilter = () => { this.setState(({showFilter}) => ({ showFilter: !showFilter })) }
-    onShowSearch = () => { this.setState(({showSearch}) => ({ showSearch: !showSearch })) }
+    onShowFilter = () => { this.setState(({ showFilter }) => ({ showFilter: !showFilter })) }
+    onShowSearch = () => { this.setState(({ showSearch }) => ({ showSearch: !showSearch })) }
 
 
     render() {
@@ -58,15 +58,16 @@ export class BookApp extends React.Component {
             <main className="books-app flex column container">
                 <p className="collection-header">Collection</p>
                 <section className="main-section flex column">
-                
-                    {!showSearch &&
-                        <p className="filter-title can-press" onClick={this.onShowSearch}>Click To Search</p>}
-                    {showSearch && <BookAdd onNewBook={this.onNewBook} onShowSearch={this.onShowSearch}/>}
-                    {!showFilter && 
-                        <p className="filter-title can-press" onClick={this.onShowFilter}>Click To Filter</p>}
-                    {showFilter && <BookFilter onSetFilter={this.onSetFilter} onShowFilter={this.onShowFilter} />}
+                    <header className="tools-header flex align-center space-between">
+
+                        <img src="../assets/img/add-book.png" title="Add Book" className={`tool-img ${(showSearch) ? 'in-use' : ''}`} onClick={this.onShowSearch}/>
+                        <img src="../assets/img/filter.png" title="Filter Collection" className={`tool-img ${(showFilter) ? 'in-use' : ''}`} onClick={this.onShowFilter}/>
+
+                    </header>
+                    {showSearch && <BookAdd onNewBook={this.onNewBook} onShowSearch={this.onShowSearch} />}
+                    {showFilter && <BookFilter onSetFilter={this.onSetFilter} onShowFilter={this.onShowFilter} isSearchShown={showSearch} />}
                     {books &&
-                        <BookList onSelectBook={this.onSelectBook} books={books} loadBooks={this.loadBooks}/>}
+                        <BookList books={books} loadBooks={this.loadBooks} />}
                 </section>
 
             </main>

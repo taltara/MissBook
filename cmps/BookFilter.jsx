@@ -25,10 +25,10 @@ export default class Filter extends React.Component {
     
     render() {
         const { title, maxPrice, minPrice, author } = this.state.filter
-        const {onShowFilter} = this.props;
+        const { isSearchShown } = this.props;
         return (
-            <React.Fragment>
-                <p className="filter-title can-press" onClick={onShowFilter}>Filter:</p>
+            <span className={`filter-area ${(isSearchShown) ? 'bottom-filter' : ''}`}>
+                <p className="filter-title">Filter:</p>
                 <section className="filter-box flex column">
                     <form onSubmit={this.onFilter} className="filter-form flex space-between align-center wrap">
 
@@ -53,7 +53,7 @@ export default class Filter extends React.Component {
                     </form>
 
                 </section>
-            </React.Fragment>
+            </span>
         )
     }
 }

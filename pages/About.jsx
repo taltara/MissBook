@@ -10,7 +10,7 @@ export class About extends React.Component {
 
     state = {
 
-        
+        animationAdd: {}
     }
 
     componentDidMount() {
@@ -21,31 +21,27 @@ export class About extends React.Component {
 
     trollAnimations = () => {
 
-        if(this.trollAnimating) return;
+        if (this.trollAnimating) return;
 
-        var elTroll = this.trollLink.current;
-        console.log(elTroll);
-        
         this.trollAnimating = true;
-    
+
         var animationsBank = ['rotate', 'rotateY', 'rotateX', 'rotateZ'];
-    
-        elTroll.style.transform = `${animationsBank[Math.floor(Math.random() * animationsBank.length)]}(${Math.floor(Math.random() * 180)}deg)`;
-    
+        this.setState({animationAdd: { transform: `${animationsBank[Math.floor(Math.random() * animationsBank.length)]}(${Math.floor(Math.random() * 180)}deg)` }});
+
         setTimeout(() => {
-            elTroll.style.transform = '';
+            this.setState({ animationAdd: { transform: ''} });
             this.trollAnimating = !this.trollAnimating;
         }, 300);
     }
 
 
     render() {
-
+        const { animationAdd } = this.state;
         return (
 
             <section className="about-section container flex column align-center space-center">
                 <p className="about-header">About Us</p>
-                <p ref={this.trollLink} onMouseEnter={this.trollAnimations} className="about-troll">Shhhh.... It's a <a target="_blank" href="https://taltara.github.io/MineSweeper-JS/">secret</a> :)</p>
+                <p ref={this.trollLink} style={animationAdd} onMouseEnter={this.trollAnimations} className="about-troll">Shhhh.... It's a <a target="_blank" href="https://taltara.github.io/MineSweeper-JS/">secret</a> :)</p>
 
             </section>
 

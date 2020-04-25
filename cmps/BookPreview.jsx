@@ -17,17 +17,19 @@ export class BookPreview extends React.Component {
     render() {
 
         const { className: className } = this.state;
-        const { book, onSelectBook } = this.props;
+        const { book } = this.props;
         return (
-            
-                <article className={`book-preview flex column align-center space-center ${className}`} onClick={() => onSelectBook(book)}>
+            <Link to={`/books/${book.title}/${book.id}`}>
+                <article className={`book-preview flex column align-center space-center ${className}`}>
+
                     <span className="title-span flex align-center wrap">{book.title}</span>
-                    <Link to={`/books/${book.title}/${book.id}`}><img src={book.thumbnail} onLoad={this.onLoadPreview} /></Link>
+                    <img src={book.thumbnail} onLoad={this.onLoadPreview} />
                     <span className="price-span flex space-between align-center"><span className="preview-desc">Price:</span>
                         <span className="flex align-center"><p className="price-amount">{book.listPrice.amount}</p>
                             <span className="preview-currency">{book.listPrice.currencyCode}</span></span></span>
                 </article>
-            
+            </Link>
+
         )
 
     }

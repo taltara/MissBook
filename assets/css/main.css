@@ -171,8 +171,35 @@ textarea {
 
 /* FILTER */
 
+.tools-header {
+
+    width: 25%;
+    margin: auto;
+    background-color: rgba(255, 255, 102, 0.75);
+    border-radius: 5px;
+}
+
+.tool-img {
+
+    width: 4rem;
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+}
+
+.tool-img:first-of-type {
+    margin-left: 1.5rem;
+}
+
+.tool-img:last-of-type {
+    margin-right: 1.5rem;
+}
+
+.tool-img:hover {
+    transform: scale(1.2);
+}
+
 .filter-box {
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
 }
 
 .search-box input {
@@ -181,7 +208,7 @@ textarea {
 
 .collection-header {
     margin: 1rem auto;
-    font-size: 3rem;
+    font-size: 3.5rem;
     text-align: center;
 }
 
@@ -189,12 +216,7 @@ textarea {
     font-size: 1.5rem;
     margin: 0 0 0.5rem;
     padding: 0 0.25rem;
-    transition: ease-in-out 0.15s;
     width: fit-content;
-}
-
-.filter-title:hover {
-    transform: scale(1.33);
 }
 
 .book-reviews .review-form {
@@ -204,6 +226,7 @@ textarea {
     -moz-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
     margin-bottom: 0.5rem;
+    margin-top: 2rem;
 }
 
 .review-form>* {
@@ -216,17 +239,23 @@ textarea {
     border: 2px dashed;
     padding: 1rem;
     /* margin-bottom: 2rem; */
-    background-color: rgba(248, 222, 126, 0.5);
-    margin-top: 2rem;
+    background-color: rgba(255, 255, 102, 0.75);
+}
+
+.bottom-filter {
+    margin-top: 1rem;
 }
 
 .loading {
     font-size: 2rem;
-
 }
 
 .filter-form {
     margin-bottom: 1rem;
+}
+
+.in-use {
+    filter: brightness(0.5);
 }
 
 .filter-form input, .review-form input {
@@ -245,6 +274,10 @@ textarea {
 
 .filter-form input:not(:last-of-type), .review-form input:not(:last-of-type) {
     margin-bottom: 0.5rem;
+}
+
+.search-area {
+    margin-top: 1rem;
 }
 
 .results {
@@ -569,6 +602,10 @@ textarea {
     grid-template-rows: 1fr;
 }
 
+.nav-books > * {
+    padding: 0.25rem;
+}
+
 .nav-books a {
     transition: ease-in-out 0.15s;
     opacity: 0.5;
@@ -595,7 +632,7 @@ textarea {
 /* PREVIEWS */
 
 .book-previews {
-    margin-top: 1rem;
+    margin-top: 2rem;
     font-family: gilamSemi, serif;
     
 }
@@ -632,6 +669,7 @@ textarea {
     -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
+    pointer-events: none;
 }
 
 .price-span {
@@ -719,6 +757,7 @@ textarea {
 .about-troll {
     transition: ease-in-out 0.3s;
     cursor: pointer;
+    font-size: 1.5rem;
 }
 
 /* MSG */

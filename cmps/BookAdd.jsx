@@ -42,7 +42,7 @@ export class BookAdd extends React.Component {
             thumbnail: (resBook.volumeInfo.imageLinks) ? resBook.volumeInfo.imageLinks.thumbnail : this.defaultCover,
             listPrice: (resBook.saleInfo.amount) ? {amount: +resBook.saleInfo.listPrice.amount,
                 currencyCode: resBook.saleInfo.listPrice.currencyCode, isOnSale: !(resBook.saleInfo.saleability === 'NOT_FOR-SALE')} : 
-                {amount: Math.floor(Math.random() * 150 + 10), currencyCode: 'ETR', isOnSale: ((Math.floor(Math.random() * 2)) % 2) ? true : false},
+                {amount: Math.floor(Math.random() * 300 + 10), currencyCode: 'ETR', isOnSale: ((Math.floor(Math.random() * 2)) % 2) ? true : false},
             reviews: []
         };
 
@@ -73,8 +73,8 @@ export class BookAdd extends React.Component {
         const { FilterBy, searchRes, isSearching } = this.state;
         const { onShowSearch } = this.props;
         return (
-            <React.Fragment>
-                <p className="filter-title can-press" onClick={onShowSearch}>Search Google:</p>
+            <span className="search-area">
+                <p className="filter-title">Google Books:</p>
                 <section className="search-box flex column">
                     <form onSubmit={this.onSearch} className="filter-form flex align-center wrap">
                         <input type="text" name='title' value={FilterBy} onChange={this.handleChange} ref={this.firstInput} />
@@ -94,7 +94,7 @@ export class BookAdd extends React.Component {
                         </section>
                     }
                 </section>
-            </React.Fragment>
+            </span>
         )
     }
 };
