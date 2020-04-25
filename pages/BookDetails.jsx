@@ -59,7 +59,7 @@ export class BookDetails extends React.Component {
         if (prevProps.match.params.bookId !== this.props.match.params.bookId) {
             console.log('Route changed, so we should load the new car');
             this.loadBook(this.props.match.params.bookId);
-            this.setState({ addClass: ''});
+            this.setState({ addClass: '' });
         }
     }
 
@@ -109,7 +109,7 @@ export class BookDetails extends React.Component {
 
     onLoadShowImg = () => {
 
-        this.setState({ addClass: 'show'});
+        this.setState({ addClass: 'show' });
     }
 
     render() {
@@ -187,17 +187,18 @@ export class BookDetails extends React.Component {
                         <button onClick={() => this.onDelete(book.id)} className="btn">Delete</button>
                         <p className="book-id">[ Id:  {book.id} ]</p>
                         <span className="nav-books grid">
-                            
+
                             <Link to={`/books/${this.prevNext.prev.prevTitle}/${this.prevNext.prev.prevId}`} className="can-press">Prev</Link>
                             <Link to={`/books/${this.prevNext.next.nextTitle}/${this.prevNext.next.nextId}`} className="can-press">Next</Link>
                         </span>
                     </main>
                     <div className="book-reviews flex column align-center">
+
                         {!showAddReview && <p className="review-title can-press" onClick={this.onShowReviewForm}>Click To Review</p>}
                         {showAddReview && <ReviewAdd book={book} onAddReview={this.onAddReview} onShowReviewForm={this.onShowReviewForm} />}
                         {
                             book.reviews.map((review, idx) =>
-                                <div className={`book-review flex column review-${(idx % 2) ? 'odd' : 'even'}`} key={idx}>
+                                <div className={`book-review flex column review-${(idx % 2) ? 'odd' : 'even'} ${(!showAddReview && !idx) ? 'top-el' : ''}`} key={idx}>
                                     <span className="review-head flex space-between"><p className="review-name">{review.reviewer}</p>
                                         <span className="remove-review flex space-center align-center" onClick={() => { this.onRemoveReview(book.id, review.id) }}>X</span></span>
                                     <span className="flex align-center"><label htmlFor="" className="muted rating-label">Rating:</label><span className="review-rating">{review.rating}</span></span>

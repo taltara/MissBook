@@ -33,13 +33,6 @@ function getNextPrevCars(bookId) {
 
     console.log(bookId, gBooks);
 
-    // query(null)
-    //     .then(books => {
-    //         gBooks = books;
-    //         console.log(gBooks);
-
-    //     });
-
     let currIdx = gBooks.findIndex(book => {
 
         return book.id === bookId;
@@ -51,7 +44,7 @@ function getNextPrevCars(bookId) {
     var nextId;
     var prevId;
 
-      if ((currIdx + 1) > gBooks.length - 1) {
+    if ((currIdx + 1) > gBooks.length - 1) {
 
         nextId = gBooks[0].id;
         nextTitle = gBooks[0].title;

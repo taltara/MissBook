@@ -11,7 +11,8 @@ export class BookAdd extends React.Component {
 
     state = {
         searchRes: null,
-        FilterBy: ''
+        FilterBy: '',
+        isSearching: false
     };
 
 
@@ -57,19 +58,19 @@ export class BookAdd extends React.Component {
 
     onSearch = () => {
         event.preventDefault();
-        console.log(event);
+        this.setState(({isSearching}) => ({isSearching: !isSearching}));
         let FilterBy = event.target[0].value;
 
         bookService.getBookApiInfo(FilterBy)
             .then(books => {
 
                 let searchRes = books.items;
-                this.setState(({ searchRes, FilterBy }));
+                this.setState(({isSearching}) => ({ searchRes, FilterBy, isSearching: !isSearching  }));
             });
     }
 
     render() {
-        const { FilterBy, searchRes } = this.state;
+        const { FilterBy, searchRes, isSearching } = this.state;
         const { onShowSearch } = this.props;
         return (
             <React.Fragment>
@@ -77,7 +78,8 @@ export class BookAdd extends React.Component {
                 <section className="search-box flex column">
                     <form onSubmit={this.onSearch} className="filter-form flex align-center wrap">
                         <input type="text" name='title' value={FilterBy} onChange={this.handleChange} ref={this.firstInput} />
-                        <button className="btn">Search</button>
+                        {isSearching && <p className="loading">Loading...</p>}
+                        {!isSearching && <button className="btn">Search</button>}
                     </form>
                     {searchRes &&
                         <section className="results-section flex column wrap align-center space-evenly">
